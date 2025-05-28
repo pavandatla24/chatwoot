@@ -41,7 +41,7 @@ $header-height: 3.5rem;
 $woot-logo-padding: $space-large $space-two;
 
 // Colors
-$color-woot: #1f93ff;
+$color-woot: #00a200;
 $color-gray: #6e6f73;
 $color-light-gray: #999a9b;
 
@@ -67,7 +67,7 @@ $masked-bg: rgba(0, 0, 0, .4);
 
 // Color-palettes
 
-$color-primary-light: #c7e3ff;
+$color-primary-light: #c4eec2;
 $color-primary-dark: darken($color-woot, 20%);
 
 // Thumbnail
@@ -93,5 +93,7 @@ $swift-ease-out: all $swift-ease-out-duration $swift-ease-out-function !default;
 $transition-ease-in: all 0.250s ease-in;
 
 :root {
+  --color-success: #00a200;
+  --color-success-light: #c4eec2;
   --dashboard-app-tabs-height: 2.4375rem;
 }
