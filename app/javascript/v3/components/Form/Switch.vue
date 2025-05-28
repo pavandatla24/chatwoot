@@ -17,9 +17,7 @@ export default {
     type="button"
     class="relative flex-shrink-0 h-4 p-0 border-none shadow-inner w-7 rounded-3xl"
     :class="
-      modelValue
-        ? 'bg-primary-600 shadow-primary-800'
-        : 'shadow-ash-400 bg-ash-200'
+      modelValue ? 'bg-woot-500 shadow-woot-800' : 'shadow-ash-400 bg-ash-200'
     "
     role="switch"
     :aria-checked="modelValue.toString()"

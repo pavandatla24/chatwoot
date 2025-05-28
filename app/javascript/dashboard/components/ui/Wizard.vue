@@ -72,26 +72,26 @@ export default {
 
     &.active {
       h3 {
-        @apply text-n-blue-text dark:text-n-blue-text;
+        @apply text-woot-500 dark:text-woot-500;
       }
 
       .step {
-        @apply bg-n-brand dark:bg-n-brand;
+        @apply bg-woot-500 dark:bg-woot-500;
       }
     }
 
     &.over {
       &::after {
-        @apply bg-n-brand dark:bg-n-brand;
+        @apply bg-woot-500 dark:bg-woot-500;
       }
 
       .step {
-        @apply bg-n-brand dark:bg-n-brand;
+        @apply bg-woot-500 dark:bg-woot-500;
       }
 
       & + .item {
         &::before {
-          @apply bg-n-brand dark:bg-n-brand;
+          @apply bg-woot-500 dark:bg-woot-500;
         }
       }
     }

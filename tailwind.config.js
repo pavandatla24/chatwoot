@@ -94,8 +94,11 @@ const tailwindConfig = {
               marginBottom: '1.5em',
             },
             a: {
-              color: 'rgb(var(--slate-12))',
+              color: 'rgb(var(--woot-500))',
               textDecoration: 'underline',
+              '&:hover': {
+                color: 'rgb(var(--woot-600))',
+              },
             },
             ul: {
               paddingInlineStart: '0.625em',
