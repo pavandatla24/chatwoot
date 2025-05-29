@@ -559,7 +559,7 @@ export default {
           :inbox-id="data.inbox_id"
           :created-at="createdAt"
         />
-        <MessageMetadata :content-attributes="message.content_attributes" />
+        <MessageMetadata :content-attributes="contentAttributes" />
       </div>
       <Spinner v-if="isPending" size="tiny" />
       <div

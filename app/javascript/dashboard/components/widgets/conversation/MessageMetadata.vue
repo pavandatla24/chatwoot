@@ -8,20 +8,14 @@ export default {
     },
   },
   computed: {
+    hasMetadata() {
+      return this.urgency || this.issueType;
+    },
     urgency() {
       return this.contentAttributes.urgency;
     },
     issueType() {
       return this.contentAttributes.issue_type;
-    },
-    deviceInfo() {
-      return this.contentAttributes.device_info || {};
-    },
-    hasDeviceInfo() {
-      return Object.keys(this.deviceInfo).length > 0;
-    },
-    hasMetadata() {
-      return this.urgency || this.issueType || this.hasDeviceInfo;
     },
   },
 };
@@ -33,8 +27,8 @@ export default {
       <!-- Urgency Badge -->
       <div v-if="urgency" class="metadata-item urgency">
         <span class="label">{{ $t('CONVERSATION.METADATA.URGENCY') }}</span>
-        <span class="badge" :class="[`urgency-${urgency}`]">
-          {{ $t(`CONVERSATION.METADATA.URGENCY_${urgency.toUpperCase()}`) }}
+        <span class="badge" :class="`urgency-${urgency}`">
+          {{ urgency.toUpperCase() }}
         </span>
       </div>
 
@@ -42,22 +36,6 @@ export default {
       <div v-if="issueType" class="metadata-item">
         <span class="label">{{ $t('CONVERSATION.METADATA.ISSUE_TYPE') }}</span>
         <span class="value">{{ issueType }}</span>
-      </div>
-
-      <!-- Device Info -->
-      <div v-if="hasDeviceInfo" class="metadata-item device">
-        <span class="label">{{ $t('CONVERSATION.METADATA.DEVICE') }}</span>
-        <div class="device-details">
-          <span v-if="deviceInfo.type" class="device-type">{{
-            deviceInfo.type
-          }}</span>
-          <span v-if="deviceInfo.os" class="device-os">{{
-            deviceInfo.os
-          }}</span>
-          <span v-if="deviceInfo.browser" class="device-browser">{{
-            deviceInfo.browser
-          }}</span>
-        </div>
       </div>
     </div>
   </div>
@@ -69,56 +47,35 @@ export default {
   font-size: 12px;
 
   .metadata-box {
-    background: var(--color-background-light);
-    border-radius: 4px;
-    padding: 8px;
+    @apply bg-slate-50 dark:bg-slate-700 rounded-md p-2;
   }
 
   .metadata-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    @apply flex items-center mb-1 last:mb-0;
 
     .label {
-      font-weight: 500;
-      margin-right: 8px;
-      color: var(--color-body);
+      @apply font-medium mr-2 text-slate-800 dark:text-slate-100;
     }
 
     .value {
-      color: var(--color-body-light);
+      @apply text-slate-600 dark:text-slate-300;
     }
   }
 
   .urgency {
     .badge {
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 500;
+      @apply px-2 py-0.5 rounded-xl font-medium;
 
       &.urgency-high {
-        background: var(--color-error-light);
-        color: var(--color-error);
+        @apply bg-red-50 dark:bg-red-900/50 text-red-700 dark:text-red-300;
       }
       &.urgency-medium {
-        background: var(--color-warning-light);
-        color: var(--color-warning);
+        @apply bg-yellow-50 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300;
       }
       &.urgency-low {
-        background: var(--color-success-light);
-        color: var(--color-success);
+        @apply bg-green-50 dark:bg-green-900/50 text-green-700 dark:text-green-300;
       }
     }
-  }
-
-  .device-details {
-    display: flex;
-    gap: 8px;
-    color: var(--color-body-light);
   }
 }
 </style>

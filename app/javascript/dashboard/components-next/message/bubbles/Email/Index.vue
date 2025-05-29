@@ -99,7 +99,7 @@ const handleSeeOriginal = () => {
     class="w-full"
     :class="{
       'bg-n-slate-4': isIncoming,
-      'bg-n-solid-blue': isOutgoing,
+      'bg-woot-50': isOutgoing,
     }"
     data-bubble-name="email"
   >

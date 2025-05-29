@@ -161,7 +161,7 @@ export default {
             </span>
             <span
               v-if="activeSort === option.key"
-              class="i-lucide-check size-2.5 flex-shrink-0 text-n-blue-text"
+              class="i-lucide-check size-2.5 flex-shrink-0 text-woot-500"
             />
           </div>
         </div>

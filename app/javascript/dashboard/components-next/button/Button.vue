@@ -70,12 +70,13 @@ const computedVariant = computed(() => {
 
 const computedColor = computed(() => {
   if (props.color) return props.color;
+  if (attrs.woot || attrs.woot === '') return 'woot';
   if (attrs.blue || attrs.blue === '') return 'blue';
   if (attrs.ruby || attrs.ruby === '') return 'ruby';
   if (attrs.amber || attrs.amber === '') return 'amber';
   if (attrs.slate || attrs.slate === '') return 'slate';
   if (attrs.teal || attrs.teal === '') return 'teal';
-  return 'blue'; // Default color
+  return 'woot'; // Default color
 });
 
 const computedSize = computed(() => {
@@ -98,15 +99,25 @@ const computedJustify = computed(() => {
 
 const STYLE_CONFIG = {
   colors: {
+    woot: {
+      solid:
+        'bg-woot-500 text-white hover:enabled:brightness-110 focus-visible:brightness-110 outline-transparent',
+      faded:
+        'bg-woot-100 text-woot-500 hover:enabled:bg-woot-200 focus-visible:bg-woot-200 outline-transparent',
+      outline: 'text-woot-500 outline-woot-500',
+      ghost:
+        'text-woot-500 hover:enabled:bg-woot-100 focus-visible:bg-woot-100 outline-transparent',
+      link: 'text-woot-500 hover:enabled:underline focus-visible:underline outline-transparent',
+    },
     blue: {
       solid:
-        'bg-n-brand text-white hover:enabled:brightness-110 focus-visible:brightness-110 outline-transparent',
+        'bg-woot-500 text-white hover:enabled:brightness-110 focus-visible:brightness-110 outline-transparent',
       faded:
-        'bg-n-brand/10 text-n-blue-text hover:enabled:bg-n-brand/20 focus-visible:bg-n-brand/20 outline-transparent',
-      outline: 'text-n-blue-text outline-n-brand',
+        'bg-woot-100 text-woot-500 hover:enabled:bg-woot-200 focus-visible:bg-woot-200 outline-transparent',
+      outline: 'text-woot-500 outline-woot-500',
       ghost:
-        'text-n-blue-text hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent',
-      link: 'text-n-blue-text hover:enabled:underline focus-visible:underline outline-transparent',
+        'text-woot-500 hover:enabled:bg-woot-100 focus-visible:bg-woot-100 outline-transparent',
+      link: 'text-woot-500 hover:enabled:underline focus-visible:underline outline-transparent',
     },
     ruby: {
       solid:

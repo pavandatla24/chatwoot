@@ -118,6 +118,10 @@ const dayClasses = day => ({
     isInCurrentMonth(day),
   'outline outline-1 outline-n-blue-8 -outline-offset-1 !text-n-blue-text':
     isToday(props.currentDate, day) && !isSelectedStartOrEndDate(day),
+  'bg-woot-500 text-white':
+    isSelectedStartOrEndDate(day) && isInCurrentMonth(day),
+  'outline outline-1 outline-woot-400 -outline-offset-1 !text-woot-500':
+    isToday(props.currentDate, day) && !isSelectedStartOrEndDate(day),
 });
 </script>
 

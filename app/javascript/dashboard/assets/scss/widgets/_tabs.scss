@@ -67,11 +67,17 @@
 
   &.is-active {
     a {
-      @apply border-b border-n-brand text-n-blue-text;
+      @apply border-b border-woot-500 text-woot-500;
     }
 
     .badge {
-      @apply bg-n-brand/10 dark:bg-n-brand/20 text-n-blue-text;
+      @apply bg-n-brand/10 dark:bg-n-brand/20 text-woot-500;
+    }
+  }
+
+  &:hover {
+    a {
+      @apply bg-woot-100 dark:bg-woot-200 text-woot-500;
     }
   }
 }

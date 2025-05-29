@@ -20,95 +20,87 @@ const initiatedAt = computed(
   () => props.conversationAttributes.initiated_at?.timestamp
 );
 
-const browserInfo = computed(() => props.conversationAttributes.browser);
-
-const browserName = computed(() => {
-  if (!browserInfo.value) return '';
-  const { browser_name: name = '', browser_version: version = '' } =
-    browserInfo.value;
-  return `${name} ${version}`;
-});
-
 const browserLanguage = computed(() =>
   getLanguageName(props.conversationAttributes.browser_language)
 );
 
-const platformName = computed(() => {
-  if (!browserInfo.value) return '';
-  const { platform_name: name = '', platform_version: version = '' } =
-    browserInfo.value;
-  return `${name} ${version}`;
-});
-
 const createdAtIp = computed(() => props.contactAttributes.created_at_ip);
-
-const staticElements = computed(() =>
-  [
-    {
-      content: initiatedAt,
-      title: 'CONTACT_PANEL.INITIATED_AT',
-      key: 'static-initiated-at',
-      type: 'static_attribute',
-    },
-    {
-      content: browserLanguage,
-      title: 'CONTACT_PANEL.BROWSER_LANGUAGE',
-      key: 'static-browser-language',
-      type: 'static_attribute',
-    },
-    {
-      content: referer,
-      title: 'CONTACT_PANEL.INITIATED_FROM',
-      key: 'static-referer',
-      type: 'static_attribute',
-    },
-    {
-      content: browserName,
-      title: 'CONTACT_PANEL.BROWSER',
-      key: 'static-browser',
-      type: 'static_attribute',
-    },
-    {
-      content: platformName,
-      title: 'CONTACT_PANEL.OS',
-      key: 'static-platform',
-      type: 'static_attribute',
-    },
-    {
-      content: createdAtIp,
-      title: 'CONTACT_PANEL.IP_ADDRESS',
-      key: 'static-ip-address',
-      type: 'static_attribute',
-    },
-  ].filter(attribute => !!attribute.content.value)
-);
 </script>
 
 <template>
-  <div class="conversation--details">
-    <CustomAttributes
-      :static-elements="staticElements"
-      attribute-class="conversation--attribute"
-      attribute-from="conversation_panel"
-      attribute-type="conversation_attribute"
-    >
-      <template #staticItem="{ element }">
-        <ContactDetailsItem
-          :key="element.title"
-          :title="$t(element.title)"
-          :value="element.content.value"
-        >
-          <a
-            v-if="element.key === 'static-referer'"
-            :href="element.content.value"
-            rel="noopener noreferrer nofollow"
-            target="_blank"
-            class="text-n-brand"
+  <div class="current-chat-info">
+    <div class="chat-info-container">
+      <div class="chat-info-header">
+        <h2 class="text-black-800 dark:text-slate-100 text-lg font-semibold">
+          {{ $t('CONVERSATION.ONGOING_CONVERSATION') }}
+        </h2>
+      </div>
+
+      <div class="chat-info-body">
+        <div class="chat-info-section">
+          <h3
+            class="text-black-800 dark:text-slate-100 text-base font-medium mb-2"
           >
-            {{ element.content.value }}
-          </a>
-        </ContactDetailsItem>
-      </template>
-    </CustomAttributes>
+            {{ $t('CONVERSATION.BROWSER_INFORMATION') }}
+          </h3>
+          <div class="chat-info-content">
+            <ContactDetailsItem
+              v-if="browserLanguage"
+              :label="$t('CONVERSATION.BROWSER_LANGUAGE')"
+              :value="browserLanguage"
+            />
+            <ContactDetailsItem
+              v-if="referer"
+              :label="$t('CONVERSATION.REFERER')"
+              :value="referer"
+            />
+            <ContactDetailsItem
+              v-if="initiatedAt"
+              :label="$t('CONVERSATION.INITIATED_AT')"
+              :value="initiatedAt"
+            />
+            <ContactDetailsItem
+              v-if="createdAtIp"
+              :label="$t('CONVERSATION.IP_ADDRESS')"
+              :value="createdAtIp"
+            />
+          </div>
+        </div>
+
+        <div class="chat-info-section">
+          <h3
+            class="text-black-800 dark:text-slate-100 text-base font-medium mb-2"
+          >
+            {{ $t('CONVERSATION.CUSTOM_ATTRIBUTES') }}
+          </h3>
+          <CustomAttributes
+            :conversation-attributes="conversationAttributes"
+            :contact-attributes="contactAttributes"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.current-chat-info {
+  @apply h-full overflow-auto;
+}
+
+.chat-info-container {
+  @apply p-4;
+}
+
+.chat-info-header {
+  @apply mb-4;
+}
+
+.chat-info-section {
+  @apply mb-6;
+}
+
+.chat-info-content {
+  @apply space-y-2;
+}
+</style>
