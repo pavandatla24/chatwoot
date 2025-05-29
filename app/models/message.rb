@@ -103,7 +103,8 @@ class Message < ApplicationRecord
   # [:external_error : Can specify if the message creation failed due to an error at external API
   store :content_attributes, accessors: [:submitted_email, :items, :submitted_values, :email, :in_reply_to, :deleted,
                                          :external_created_at, :story_sender, :story_id, :external_error,
-                                         :translations, :in_reply_to_external_id, :is_unsupported], coder: JSON
+                                         :translations, :in_reply_to_external_id, :is_unsupported
+                                         :urgency, :issue_type, :device_info], coder: JSON  ## New attributes for enhanced features
 
   store :external_source_ids, accessors: [:slack], coder: JSON, prefix: :external_source_id
 
@@ -403,6 +404,12 @@ class Message < ApplicationRecord
     conversation.update_columns(last_activity_at: created_at)
     # rubocop:enable Rails/SkipsModelValidations
   end
+
+  # Add validation for urgency values
+  validates :urgency, inclusion: { 
+    in: %w[low medium high],
+    allow_nil: true 
+  }, if: -> { content_attributes&.key?('urgency') }
 end
 
 Message.prepend_mod_with('Message')
