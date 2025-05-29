@@ -71,7 +71,6 @@ class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
                     :in_reply_to, :deleted, :external_created_at,
                     :story_sender, :story_id, :external_error,
                     :translations, :in_reply_to_external_id, :is_unsupported,
-                    # New attributes for enhanced features
                     :urgency, :issue_type,
                     { device_info: [:type, :os, :browser] }
                   ])
