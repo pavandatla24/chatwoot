@@ -12,8 +12,7 @@ class Api::V1::Widget::EventsController < Api::V1::Widget::BaseController
   def event_info
     {
       widget_language: params[:locale],
-      browser_language: browser.accept_language.first&.code,
-      browser: browser_params
+      browser_language: browser.accept_language.first&.code
     }
   end
 

@@ -19,6 +19,30 @@ properties:
     type: integer
     enum: [0, 1, 2]
     description: The type of the message
+  content_attributes:
+    type: object
+    description: Additional attributes for the message content
+    properties:
+      urgency:
+        type: string
+        enum: [high, medium, low]
+        description: The urgency level of the message
+      issue_type:
+        type: string
+        enum: [technical, billing, feature, question, general]
+        description: The type of issue being discussed
+      deleted:
+        type: boolean
+        description: Whether the message has been deleted
+      submitted_email:
+        type: string
+        description: Email submitted in the message
+      submitted_values:
+        type: object
+        description: Form values submitted in the message
+      in_reply_to:
+        type: integer
+        description: ID of the message being replied to
   created_at:
     type: integer
     description: The time at which message was created
@@ -31,7 +55,7 @@ properties:
   status:
     type: string
     enum: ["sent", "delivered", "read", "failed"]
-    description: The status of the message
+    description: The delivery status of the message
   source_id:
     type: string
     description: The source ID of the message
@@ -39,9 +63,6 @@ properties:
     type: string
     enum: ["text", "input_select", "cards", "form"]
     description: The type of the template message
-  content_attributes:
-    type: object
-    description: The content attributes for each content_type
   sender_type:
     type: string
     enum: ["contact", "agent", "agent_bot"]

@@ -26,6 +26,7 @@ import { useTrack } from 'dashboard/composables';
 import { emitter } from 'shared/helpers/mitt';
 
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import MessageMetadata from './MessageMetadata.vue';
 
 export default {
   components: {
@@ -43,6 +44,7 @@ export default {
     InstagramStoryReply,
     Spinner,
     NextButton,
+    MessageMetadata,
   },
   props: {
     data: {
@@ -557,6 +559,7 @@ export default {
           :inbox-id="data.inbox_id"
           :created-at="createdAt"
         />
+        <MessageMetadata :content-attributes="contentAttributes" />
       </div>
       <Spinner v-if="isPending" size="tiny" />
       <div

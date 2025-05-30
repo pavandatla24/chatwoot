@@ -37,7 +37,6 @@ class Api::V1::Widget::BaseController < ApplicationController
       contact_inbox_id: @contact_inbox.id,
       additional_attributes: {
         browser_language: browser.accept_language&.first&.code,
-        browser: browser_params,
         initiated_at: timestamp_params,
         referer: permitted_params[:message][:referer_url]
       },
@@ -59,16 +58,6 @@ class Api::V1::Widget::BaseController < ApplicationController
     permitted_params.dig(:contact, :phone_number)
   end
 
-  def browser_params
-    {
-      browser_name: browser.name,
-      browser_version: browser.full_version,
-      device_name: browser.device.name,
-      platform_name: browser.platform.name,
-      platform_version: browser.platform.version
-    }
-  end
-
   def timestamp_params
     { timestamp: permitted_params[:message][:timestamp] }
   end
@@ -79,7 +68,7 @@ class Api::V1::Widget::BaseController < ApplicationController
       sender: @contact,
       content: permitted_params[:message][:content],
       inbox_id: conversation.inbox_id,
-      content_attributes: {
+      content_attributes: permitted_params[:message][:content_attributes].presence || {
         in_reply_to: permitted_params[:message][:reply_to]
       },
       echo_id: permitted_params[:message][:echo_id],
