@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: aiAgent_documents
+# Table name: ai_agent_documents
 #
 #  id            :bigint           not null, primary key
 #  content       :text
@@ -10,18 +10,18 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  account_id    :bigint           not null
-#  topic_id  :bigint           not null
+#  topic_id      :bigint           not null
 #
 # Indexes
 #
-#  index_aiAgent_documents_on_account_id                      (account_id)
-#  index_aiAgent_documents_on_topic_id                    (topic_id)
-#  index_aiAgent_documents_on_topic_id_and_external_link  (topic_id,external_link) UNIQUE
-#  index_aiAgent_documents_on_status                          (status)
+#  index_ai_agent_documents_on_account_id                  (account_id)
+#  index_ai_agent_documents_on_status                      (status)
+#  index_ai_agent_documents_on_topic_id                    (topic_id)
+#  index_ai_agent_documents_on_topic_id_and_external_link  (topic_id,external_link) UNIQUE
 #
 class AiAgent::Document < ApplicationRecord
   class LimitExceededError < StandardError; end
-  self.table_name = 'aiAgent_documents'
+  self.table_name = 'ai_agent_documents'
 
   belongs_to :topic, class_name: 'AiAgent::Topic'
   has_many :responses, class_name: 'AiAgent::TopicResponse', dependent: :destroy, as: :documentable
@@ -61,16 +61,21 @@ class AiAgent::Document < ApplicationRecord
     AiAgent::Documents::ResponseBuilderJob.perform_later(self)
   end
 
-  def update_document_usage
-    account.update_document_usage
-  end
-
   def ensure_account_id
     self.account_id = topic&.account_id
   end
 
   def ensure_within_plan_limit
-    limits = account.usage_limits[:aiAgent][:documents]
-    raise LimitExceededError, 'Document limit exceeded' unless limits[:current_available].positive?
+    return unless account.present?
+
+    return unless account.document_count >= account.document_limit
+
+    raise LimitExceededError, I18n.t('errors.aiAgent.document.limit_exceeded')
+  end
+
+  def update_document_usage
+    return unless account.present?
+
+    account.update_document_count
   end
 end
