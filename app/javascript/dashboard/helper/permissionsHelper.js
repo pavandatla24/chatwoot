@@ -12,6 +12,10 @@ export const getCurrentAccount = ({ accounts } = {}, accountId = null) => {
 };
 
 export const getUserPermissions = (user, accountId) => {
+  // If user is SuperAdmin, grant all permissions
+  if (user.type === 'SuperAdmin') {
+    return ['administrator', 'agent', 'super_admin'];
+  }
   const currentAccount = getCurrentAccount(user, accountId) || {};
   return currentAccount.permissions || [];
 };

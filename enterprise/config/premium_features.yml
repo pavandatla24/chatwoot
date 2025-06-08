@@ -3,5 +3,12 @@
 - audit_logs
 - response_bot
 - sla
-- aiAgent_integration
 - custom_roles
+
+aiAgent:
+  name: 'AiAgent'
+  description: 'Enable AI-powered conversations with your customers.'
+  enabled: true
+  icon: 'icon-aiAgent'
+  config_key: 'aiAgent'
+  enterprise: false

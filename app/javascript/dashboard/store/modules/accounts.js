@@ -44,6 +44,7 @@ export const getters = {
   },
   isFeatureEnabledonAccount: $state => (id, featureName) => {
     const { features = {} } = findRecordById($state, id);
+
     return features[featureName] || false;
   },
 };
@@ -53,6 +54,7 @@ export const actions = {
     commit(types.default.SET_ACCOUNT_UI_FLAG, { isFetchingItem: true });
     try {
       const response = await AccountAPI.get();
+
       commit(types.default.ADD_ACCOUNT, response.data);
       commit(types.default.SET_ACCOUNT_UI_FLAG, {
         isFetchingItem: false,

@@ -41,7 +41,7 @@ $header-height: 3.5rem;
 $woot-logo-padding: $space-large $space-two;
 
 // Colors
-$color-woot: #00a200;
+$color-woot: #00a200; // pr1
 $color-gray: #6e6f73;
 $color-light-gray: #999a9b;
 
@@ -66,7 +66,6 @@ $alert-color: #ff382d;
 $masked-bg: rgba(0, 0, 0, .4);
 
 // Color-palettes
-
 $color-primary-light: #c4eec2;
 $color-primary-dark: darken($color-woot, 20%);
 
@@ -77,9 +76,7 @@ $thumbnail-radius: 2.5rem;
 $conv-header-height: 2.5rem;
 
 // Inbox List
-
 $inbox-thumb-size: 3rem;
-
 
 // Snackbar default
 $woot-snackbar-bg: #323232;
