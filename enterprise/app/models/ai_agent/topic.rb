@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: aiAgent_topics
+# Table name: ai_agent_topics
 #
 #  id          :bigint           not null, primary key
 #  config      :jsonb            not null
@@ -12,22 +12,22 @@
 #
 # Indexes
 #
-#  index_aiAgent_topics_on_account_id  (account_id)
+#  index_ai_agent_topics_on_account_id  (account_id)
 #
 class AiAgent::Topic < ApplicationRecord
   include Avatarable
 
-  self.table_name = 'aiAgent_topics'
+  self.table_name = 'ai_agent_topics'
 
   belongs_to :account
   has_many :documents, class_name: 'AiAgent::Document', dependent: :destroy_async
   has_many :responses, class_name: 'AiAgent::TopicResponse', dependent: :destroy_async
-  has_many :aiAgent_inboxes,
+  has_many :ai_agent_inboxes,
            class_name: 'AiAgentInbox',
-           foreign_key: :aiAgent_topic_id,
+           foreign_key: :ai_agent_topic_id,
            dependent: :destroy_async
   has_many :inboxes,
-           through: :aiAgent_inboxes
+           through: :ai_agent_inboxes
   has_many :messages, as: :sender, dependent: :nullify
   has_many :copilot_threads, dependent: :destroy_async
 
@@ -50,7 +50,7 @@ class AiAgent::Topic < ApplicationRecord
       avatar_url: avatar_url.presence || default_avatar_url,
       description: description,
       created_at: created_at,
-      type: 'aiAgent_topic'
+      type: 'ai_agent_topic'
     }
   end
 
@@ -61,13 +61,13 @@ class AiAgent::Topic < ApplicationRecord
       avatar_url: avatar_url.presence || default_avatar_url,
       description: description,
       created_at: created_at,
-      type: 'aiAgent_topic'
+      type: 'ai_agent_topic'
     }
   end
 
   private
 
   def default_avatar_url
-    "#{ENV.fetch('FRONTEND_URL', nil)}/assets/images/dashboard/aiAgent/logo.svg"
+    "#{ENV.fetch('FRONTEND_URL', nil)}/assets/images/dashboard/ai_agent/logo.svg"
   end
 end

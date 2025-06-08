@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V1::Accounts::AiAgent::Inboxes', type: :request do
   let(:account) { create(:account) }
-  let(:topic) { create(:aiAgent_topic, account: account) }
+  let(:topic) { create(:ai_agent_topic, account: account) }
   let(:inbox) { create(:inbox, account: account) }
   let(:inbox2) { create(:inbox, account: account) }
-  let!(:aiAgent_inbox) { create(:aiAgent_inbox, aiAgent_topic: topic, inbox: inbox) }
+  let!(:ai_agent_inbox) { create(:ai_agent_inbox, ai_agent_topic: topic, inbox: inbox) }
   let(:admin) { create(:user, account: account, role: :administrator) }
   let(:agent) { create(:user, account: account, role: :agent) }
 
@@ -20,7 +20,7 @@ RSpec.describe 'Api::V1::Accounts::AiAgent::Inboxes', type: :request do
             headers: agent.create_new_auth_token
 
         expect(response).to have_http_status(:ok)
-        expect(json_response[:payload].first[:id]).to eq(aiAgent_inbox.inbox.id)
+        expect(json_response[:payload].first[:id]).to eq(ai_agent_inbox.inbox.id)
       end
     end
 

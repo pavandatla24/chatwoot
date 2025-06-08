@@ -22,8 +22,8 @@ const primaryMenuItems = accountId => [
     key: 'aiAgent',
     label: 'AIAGENT',
     featureFlag: FEATURE_FLAGS.AIAGENT,
-    toState: frontendURL(`accounts/${accountId}/aiAgent/documents`),
-    toStateName: 'aiAgent',
+    toState: frontendURL(`accounts/${accountId}/aiAgent/topics`),
+    toStateName: 'aiAgent_topics_index',
   },
   {
     icon: 'book-contacts',

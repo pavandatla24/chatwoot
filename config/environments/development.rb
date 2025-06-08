@@ -27,10 +27,16 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-  config.public_file_server.enabled = true
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = ENV.fetch('ACTIVE_STORAGE_SERVICE', 'local').to_sym
+  config.active_storage.service = :local
+
+  # Enable serving of static files from the /public folder
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, max-age=3600',
+    'Access-Control-Allow-Origin' => '*'
+  }
 
   config.active_job.queue_adapter = :sidekiq
 
