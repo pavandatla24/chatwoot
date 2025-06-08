@@ -13,11 +13,12 @@ export const routes = [
     component: TopicIndex,
     name: 'aiAgent_topics_index',
     meta: {
-      permissions: ['administrator', 'agent'],
+      permissions: ['administrator', 'agent', 'super_admin'],
       featureFlag: FEATURE_FLAGS.AIAGENT,
       installationTypes: [
         INSTALLATION_TYPES.CLOUD,
         INSTALLATION_TYPES.ENTERPRISE,
+        INSTALLATION_TYPES.COMMUNITY,
       ],
     },
   },
@@ -31,6 +32,7 @@ export const routes = [
       installationTypes: [
         INSTALLATION_TYPES.CLOUD,
         INSTALLATION_TYPES.ENTERPRISE,
+        INSTALLATION_TYPES.COMMUNITY,
       ],
     },
   },
@@ -44,6 +46,7 @@ export const routes = [
       installationTypes: [
         INSTALLATION_TYPES.CLOUD,
         INSTALLATION_TYPES.ENTERPRISE,
+        INSTALLATION_TYPES.COMMUNITY,
       ],
     },
   },
@@ -57,6 +60,7 @@ export const routes = [
       installationTypes: [
         INSTALLATION_TYPES.CLOUD,
         INSTALLATION_TYPES.ENTERPRISE,
+        INSTALLATION_TYPES.COMMUNITY,
       ],
     },
   },
@@ -70,6 +74,7 @@ export const routes = [
       installationTypes: [
         INSTALLATION_TYPES.CLOUD,
         INSTALLATION_TYPES.ENTERPRISE,
+        INSTALLATION_TYPES.COMMUNITY,
       ],
     },
   },

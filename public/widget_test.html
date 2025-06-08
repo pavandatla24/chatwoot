@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Widget with Custom Logo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Omnify Support</h1>
+        <p>This is a demo page showing our chat widget with a custom logo. The chat widget should appear in the bottom right corner of this page.</p>
+    </div>
+
+    <!-- Chat Widget Script -->
+    <script>
+        // Debug logging
+        console.log('Initializing chat widget...');
+
+        // Initialize widget settings first
+        window.chatwootSettings = {
+            hideMessageBubble: false,
+            position: 'right',
+            locale: 'en',
+            type: 'expanded_bubble',
+            launcherTitle: '',
+            showMessageBubble: true,
+            widgetColor: '#22c55e',
+            bubbleBackground: '#22c55e',
+            useInboxAvatarForBot: true
+        };
+
+        (function(d,t) {
+            var BASE_URL = 'http://localhost:3000';
+            console.log('Loading SDK from:', BASE_URL+'/packs/js/sdk.js');
+            
+            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=BASE_URL+"/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g,s);
+
+            g.onload=function(){
+                console.log('SDK loaded successfully');
+                
+                // Run the widget
+                window.chatwootSDK.run({
+                    websiteToken: 'fhpft83KD5MqEsHWbN3Eh7Lk',
+                    baseUrl: BASE_URL
+                });
+
+                // Add custom styling after widget loads
+                setTimeout(() => {
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .chat-bubble.user {
+                            background: rgb(34, 197, 94) !important;
+                            color: white !important;
+                        }
+                        .chat-bubble.agent {
+                            background: #f0fdf4 !important;
+                            color: #22c55e !important;
+                            border: 1px solid #22c55e !important;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }, 2000);
+            };
+
+            g.onerror = function(error) {
+                console.error('Failed to load SDK:', error);
+            };
+
+        })(document,"script");
+
+        // Check if the widget loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking for widget...');
+            setTimeout(() => {
+                if (!window.$chatwoot) {
+                    console.error('Widget failed to initialize after timeout');
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 
